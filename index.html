@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for chezka 💌</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #ffe6ef, #ffd6e8);
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .envelope {
+    width: 320px;
+    height: 220px;
+    background: white;
+    position: absolute;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease;
+  }
+
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: white;
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: top;
+    transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 3;
+  }
+
+  .heart {
+    position: relative;
+    width: 50px;
+    height: 45px;
+    background-color: #ff80b5;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    transition: opacity 0.8s ease, transform 0.5s ease;
+    z-index: 4;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 45px;
+    background-color: #ff80b5;
+    border-radius: 50%;
+  }
+
+  .heart::before {
+    top: -25px;
+    left: 0;
+  }
+
+  .heart::after {
+    left: 25px;
+    top: 0;
+  }
+
+  .letter {
+    opacity: 0;
+    transform: translateY(20px);
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    width: 60%;
+    max-width: 400px;
+    text-align: left;
+    line-height: 1.6;
+    font-size: 13.5px;
+    transition: opacity 2s ease, transform 1.8s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+    pointer-events: none;
+  }
+
+  .open .flap {
+    transform: rotateX(-180deg);
+  }
+
+  .open .heart {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  .fade-out {
+    opacity: 0;
+  }
+
+  .show-letter .letter {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  /* 💖 responsive fix for phones */
+  @media (max-width: 600px) {
+    .letter {
+      width: 85%;
+      max-height: 80vh;
+      overflow-y: auto;
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .envelope {
+      width: 260px;
+      height: 180px;
+    }
+
+    .heart {
+      width: 40px;
+      height: 36px;
+    }
+
+    .heart::before,
+    .heart::after {
+      width: 40px;
+      height: 36px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="heart"></div>
+  </div>
+
+  <div class="letter" id="letter">
+    <p>Haiii Chezka!</p>
+    <p>Okay, this might sound super random (and maybe even a little weird..), but I wanted to say this before sembreak starts. I know, it’s literally the most random timing to confess right before a long break. Hehehe I kinda planned it that way though 😭 I guess I just didn’t want to keep it to myself anymore.</p>
+    <p>Please don’t find this creepy or anything! I swear it’s nothing like that. I just really admire you as a person. Yes, I like you. You’re one of those people who make everything feel lighter without even realizing it. You’re super kind, caring, responsible, and honestly one of the funniest people ever. You make people laugh without even trying, and I think that’s such a rare kind of charm.</p>
+    <p>You have this energy that makes everyone around you feel safe and comfortable. I notice how you treat people, how patient and warm you are, even in small moments.. and I think that’s what made me start liking you. It’s not just your humor or your personality (though those are definitely part of it hehe), it’s more of how genuine you are. You never pretend to be someone else, and that’s something I really admire.</p>
+    <p>Medyo OA pero it's true ha!</p>
+    <p>We’re not that close, but I know you're a really great person! I'm not expecting anything back, okay? I really wanted to let it out and tell you how I feel. We're pretty awkward at the moment, and that's really on me hehe..I also just wanted you to know that someone out here really, really thinks you’re amazing. You make people’s days better just by being you.</p>
+    <p>Anyway, I hope this doesn’t make things weird 😅 and I hope we won't be awkward. I just wanted to be honest for once, before the break starts. I hope you enjoy your wellness break, get lots of rest, and do all the things that make you happy. You deserve it, Chezka 💗</p>
+    <p>With love, <br><b>Mafi 💕</b></p>
+  </div>
+</div>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const scene = document.getElementById('scene');
+  const heart = document.querySelector('.heart');
+
+  function openLetter() {
+    envelope.classList.add('open');
+    setTimeout(() => {
+      envelope.classList.add('fade-out');
+    }, 900);
+    setTimeout(() => {
+      scene.classList.add('show-letter');
+    }, 1600);
+  }
+
+  envelope.addEventListener('click', openLetter);
+  heart.addEventListener('click', openLetter);
+</script>
+
+</body>
+</html>
